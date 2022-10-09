@@ -20,6 +20,16 @@ const getAccounts = () => {
     })
 }
 
+const deleteAccount = (data) => {
+    con.query(`UPDATE users SET isDeleted = '1' WHERE users.id_user = ${data.id_user}`)
+}
+
+const reinstateAccount = (data) => {
+    con.query(`UPDATE users SET isDeleted = '0' WHERE users.id_user = ${data.id_user}`)
+}
+
 module.exports = {
-    getAccounts
+    getAccounts,
+    deleteAccount,
+    reinstateAccount
 }

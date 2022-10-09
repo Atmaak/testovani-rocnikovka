@@ -29,7 +29,7 @@ const createAccount = async (data) => {
 const loginToAccount = async (data) => {
     console.log(data)
     return new Promise((resolve) => {
-        con.query(`SELECT * FROM users WHERE email = "${data.email}"`, (err, result) => {
+        con.query(`SELECT * FROM users WHERE email = "${data.email}" && isDeleted = '0'`, (err, result) => {
             if(err) resolve(err)
             if(result.length == 0) return resolve({done: false, message: "Špatně zadané informace nebo účet neexistuje!"})
             if(passwordHash.verify(data.password, result[0].password)){

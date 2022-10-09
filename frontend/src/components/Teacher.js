@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDataContext } from  '../context/DataContext'
 import { Button, Container } from 'react-bootstrap'
+import CreateTest from './CreateTest'
 
 const Teacher = () => {
   const { teacherLogOut, teacher, DarkMode } = useDataContext() 
@@ -8,8 +9,7 @@ const Teacher = () => {
     <>
       <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${DarkMode.toLowerCase() === 'light' ? 'dark' : 'light'}`}>
         <Container>
-          <h1>Učitel: {teacher.name}</h1>
-          <Button onClick={teacherLogOut}>LogOut</Button>
+          <CreateTest />
         </Container>
       </div>
     </>

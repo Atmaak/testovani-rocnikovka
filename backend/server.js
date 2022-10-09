@@ -25,3 +25,13 @@ app.post('/teacher/loginToAccount', async (req, res) => {
 app.get('/admin/getAccounts', async (req, res) => {
     res.send(await admin.getAccounts())
 })
+
+app.post('/admin/deleteAccount', (req, res) => {
+    admin.deleteAccount(req.body)
+    res.sendStatus(200)
+})
+
+app.post('/admin/reinstateAccount', (req, res) => {
+    admin.reinstateAccount(req.body)
+    res.sendStatus(200)
+})
