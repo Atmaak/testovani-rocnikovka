@@ -16,12 +16,12 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route path="/teacher" element={<PrivateRoute admin={false}><Teacher /></PrivateRoute>} />
+        <Route path="/teacher" element={<PrivateRoute><Teacher /></PrivateRoute>} />
         <Route path="/student" element={<Student />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/adminsection" element={<PrivateRoute admin={true}><AdminSection /></PrivateRoute>} />
-        <Route path="/profile" element={<PrivateRoute admin={false}><Profile /></PrivateRoute>}/>
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
         
     </Routes>
     </>

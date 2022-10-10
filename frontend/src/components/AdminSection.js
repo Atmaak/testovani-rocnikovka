@@ -1,13 +1,19 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useDataContext } from  '../context/DataContext'
 import { Container, Table, Button } from 'react-bootstrap'
 import { GrStatusDisabled, GrStatusGood } from 'react-icons/gr'
 
 const AdminSection = () => {
-  const { DarkMode, textModeColor, accounts, adminDeleteAccount, adminReinstateAccount, loading } = useDataContext()
+  const { DarkMode, textModeColor, accounts, adminDeleteAccount, adminReinstateAccount, loading, getAccounts } = useDataContext()
   const buttonCustomStyles = {
     "width": "1500px"
   }
+
+  useEffect(() => {
+    getAccounts()
+  }, [])
+  
+
   return (
     <>
       <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textModeColor}`}>

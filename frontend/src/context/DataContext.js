@@ -22,8 +22,10 @@ export function DataProvider({ children }){
     const [accounts, setAccounts] = useState()
 
     useEffect(()=> {
-        if(cookies.teacher) setTeacher(cookies.teacher)
-        setIsAdmin(cookies.teacher.admin == 1)
+        if(cookies.teacher) {
+            setTeacher(cookies.teacher)
+            setIsAdmin(cookies.teacher.admin == 1)
+        }
         getAccounts()
     }, [])
 
@@ -116,6 +118,7 @@ export function DataProvider({ children }){
         teacherRegister,
         teacherLogOut,
         accounts,
+        getAccounts,
         adminDeleteAccount,
         adminReinstateAccount,
         loading

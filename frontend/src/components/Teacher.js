@@ -9,7 +9,7 @@ const Teacher = () => {
     <>
       <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${DarkMode.toLowerCase() === 'light' ? 'dark' : 'light'}`}>
         <Container>
-          <CreateTest />
+          {/* <CreateTest /> */}
         </Container>
       </div>
     </>
