@@ -14,7 +14,7 @@ const Profile = () => {
             <Card.Title className="display-1 text-center">
                 Profil
             </Card.Title>
-            <Card.Text className='display-6'>
+            <Card.Body className='display-6'>
                 <div className="d-flex justify-content-center w-100" >
                     <div className='text-start m-3'>
                         <div className='m-2'>Jméno:</div>
@@ -27,7 +27,7 @@ const Profile = () => {
                         <div className='m-2'>{new Date(teacher.timestamp).toLocaleDateString()}</div>
                     </div>
                 </div>
-            </Card.Text>
+            </Card.Body>
             <Button onClick={teacherLogOut} variant={DarkMode} className={`border border-${DarkMode.toLowerCase() === 'light' ? 'dark' : 'light'}`}>Ohlásit se</Button>
           </Card>
         </Container>

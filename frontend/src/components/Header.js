@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg={DarkMode} variant={DarkMode}>
       <Container>
-        <Navbar.Brand onClick={() => goToLink('/')}>Tester</Navbar.Brand>
+        <Navbar.Brand onClick={() => goToLink('/')} style={{"cursor": "pointer"}}>Tester</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

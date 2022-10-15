@@ -27,7 +27,7 @@ const AdminSection = () => {
               <th>E-mail</th>
               <th>Založeno</th>
               <th className='text-center'>Funkční</th>
-              <th className='text-center'>Edit</th>
+              <th className='text-center'>Vypnout</th>
             </tr>
           </thead>
           <tbody>

@@ -5,6 +5,7 @@ const cors = require('cors')
 
 const account = require('./scripts/account')
 const admin = require('./scripts/admin')
+const test = require('./scripts/test')
 
 app.use(express.json())
 
@@ -34,4 +35,12 @@ app.post('/admin/deleteAccount', (req, res) => {
 app.post('/admin/reinstateAccount', (req, res) => {
     admin.reinstateAccount(req.body)
     res.sendStatus(200)
+})
+
+app.post('/teacher/createTest', async (req, res) => {
+    res.send(await test.createTest(req.body))
+})
+
+app.get('/student/getAllTests', async (req, res) => {
+    res.send(await test.getAllTests())
 })

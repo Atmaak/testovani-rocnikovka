@@ -27,7 +27,6 @@ const createAccount = async (data) => {
 }
 
 const loginToAccount = async (data) => {
-    console.log(data)
     return new Promise((resolve) => {
         con.query(`SELECT * FROM users WHERE email = "${data.email}" && isDeleted = '0'`, (err, result) => {
             if(err) resolve(err)

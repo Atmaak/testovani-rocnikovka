@@ -14,7 +14,11 @@ export function DataProvider({ children }){
     const [cookies, setCookies, removeCookies] = useCookies()
     const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(false)
-    
+
+    //student
+    const [tests, setTests] = useState([])
+    const [shownTest, setShownTest] = useState()
+
     //teacher
     const [teacher, setTeacher] = useState()
     
@@ -27,6 +31,7 @@ export function DataProvider({ children }){
             setIsAdmin(cookies.teacher.admin == 1)
         }
         getAccounts()
+        getTests()
     }, [])
 
     const onChangeDarkMode = () => {
@@ -40,6 +45,15 @@ export function DataProvider({ children }){
         }
     }
 
+    //student
+
+    const getTests = async () => {
+        let res = await fetch('http://localhost:3001/student/getAllTests')
+        let data = await res.json()
+        setTests(await data)
+        console.log(data)
+    }
+
     //teacher
     const teacherLogin = async (email, password) => {
         let res = await fetch('http://localhost:3001/teacher/loginToAccount',{
@@ -51,6 +65,7 @@ export function DataProvider({ children }){
        
         if(data.done){
             setTeacher(data.user)
+            setIsAdmin(data.user.admin == 1)
             setCookies('teacher', data.user)
             return data
         }
@@ -72,6 +87,15 @@ export function DataProvider({ children }){
     const teacherLogOut = () => {
         removeCookies('teacher')
         setTeacher(null)
+    }
+
+    const createTest = async (test) => {
+        await fetch('http://localhost:3001/teacher/createTest', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({teacher, test})
+        })
+        getTests()
     }
 
     //admin
@@ -117,11 +141,15 @@ export function DataProvider({ children }){
         teacherLogin,
         teacherRegister,
         teacherLogOut,
+        createTest,
         accounts,
         getAccounts,
         adminDeleteAccount,
         adminReinstateAccount,
-        loading
+        loading,
+        tests,
+        shownTest, 
+        setShownTest
     }
 
     return (

@@ -1,11 +1,12 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { useDataContext } from '../context/DataContext'
+import { useCookies } from 'react-cookie'
 
 const PrivateRoute = ({ children, admin = false }) => {
-  const { isAdmin, teacher } = useDataContext();
-  if(admin) return isAdmin ? children : <Navigate to="/" />
-  return teacher ? children : <Navigate to="/login" />;
+  const [cookies] = useCookies()
+
+  if(admin) return cookies?.teacher.admin == 1 ? children : <Navigate to="/" />
+  return cookies?.teacher ? children : <Navigate to="/login" />;
 }
 
 export default PrivateRoute
