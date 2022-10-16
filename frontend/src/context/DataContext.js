@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 import fetch from 'node-fetch'
 
+import { useNavigate } from 'react-router-dom'
 const DataContext = React.createContext()
 
 export function useDataContext(){
@@ -9,6 +10,8 @@ export function useDataContext(){
 }
 
 export function DataProvider({ children }){
+    const history = useNavigate()
+
     const [DarkMode, setDarkMode] = useState('dark')
     const [textModeColor, setTextModeColor] = useState('light')
     const [cookies, setCookies, removeCookies] = useCookies()
@@ -21,7 +24,8 @@ export function DataProvider({ children }){
 
     //teacher
     const [teacher, setTeacher] = useState()
-    
+    const [testOnAccount, setTestsOnAccount] = useState([])
+    const [shownOwnTest, setShowOwnTest] = useState([])
     //admin
     const [accounts, setAccounts] = useState()
 
@@ -33,6 +37,9 @@ export function DataProvider({ children }){
         getAccounts()
         getTests()
     }, [])
+    useEffect(() => {
+        getTestsFromAccount()
+    }, [teacher])
 
     const onChangeDarkMode = () => {
         if(DarkMode === 'dark') {
@@ -51,10 +58,32 @@ export function DataProvider({ children }){
         let res = await fetch('http://localhost:3001/student/getAllTests')
         let data = await res.json()
         setTests(await data)
-        console.log(data)
+    }
+
+    const getTest = async (test) => {
+        let res = await fetch('http://localhost:3001/student/getTest', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({test: test})
+        })
+        let data = await res.json()
+        setShownTest(data)
     }
 
     //teacher
+
+    const getTestsFromAccount = async () => {
+        if(!teacher) return
+        let res = await fetch('http://localhost:3001/teacher/getTestFromAccount',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({teacher})
+        })
+        let data = await res.json()
+        await setTestsOnAccount(data)
+        console.log(data)
+    }
+
     const teacherLogin = async (email, password) => {
         let res = await fetch('http://localhost:3001/teacher/loginToAccount',{
             method: 'POST',
@@ -87,6 +116,7 @@ export function DataProvider({ children }){
     const teacherLogOut = () => {
         removeCookies('teacher')
         setTeacher(null)
+        history('/')
     }
 
     const createTest = async (test) => {
@@ -149,7 +179,11 @@ export function DataProvider({ children }){
         loading,
         tests,
         shownTest, 
-        setShownTest
+        setShownTest,
+        getTest,
+        testOnAccount,
+        setShowOwnTest,
+        shownOwnTest
     }
 
     return (

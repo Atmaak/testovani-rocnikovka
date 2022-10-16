@@ -31,6 +31,7 @@ const CreateTest = () => {
   }
 
   const handleCreateTest = () => {
+    console.log(questions)
     if(questions.length == 0) return
     createTest({name: name.current.value, quantity_of_questions: questions.length, questions: questions})
     history('/teacher')

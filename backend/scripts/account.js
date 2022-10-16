@@ -29,7 +29,7 @@ const createAccount = async (data) => {
 const loginToAccount = async (data) => {
     return new Promise((resolve) => {
         con.query(`SELECT * FROM users WHERE email = "${data.email}" && isDeleted = '0'`, (err, result) => {
-            if(err) resolve(err)
+            if(err) return resolve(err)
             if(result.length == 0) return resolve({done: false, message: "Špatně zadané informace nebo účet neexistuje!"})
             if(passwordHash.verify(data.password, result[0].password)){
                 resolve({done: true, user: result[0]})
@@ -38,7 +38,19 @@ const loginToAccount = async (data) => {
         })
     })
 }
+
+const getTestsFromAccount = async (data) => {
+    console.log(data)
+    return new Promise(resolve => {
+        con.query(`SELECT * FROM tests where id_user = ${data.teacher.id_user}`, (err, result) => {
+            if(err) return resolve(err)
+            return resolve(result)
+        })
+    })
+}
+
 module.exports = {
     createAccount,
-    loginToAccount
+    loginToAccount,
+    getTestsFromAccount
 }

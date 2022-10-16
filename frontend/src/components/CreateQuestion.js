@@ -24,11 +24,11 @@ const CreateQuestion = ({ setNumberOfQuestions, numberOfQuestions, addQuestion})
         setUsed(true)
         setNumberOfQuestions(numberOfQuestions+1)
         if(answer1.current.value != '' && answer2.current.value != '' && answer3.current.value != '' && answer4.current.value != ''){
-            return addQuestion({text: question.current.value, answer1: { text: answer1.current.value, correct: `${rightAnswer === 'answer1'}` },answer2: { text: answer2.current.value, correct: `${rightAnswer === 'answer2'}` },answer3: { text: answer3.current.value, correct: `${rightAnswer === 'answer3'}` },answer4: { text: answer4.current.value, correct: `${rightAnswer === 'answer4'}` } })
+            return addQuestion({text: question.current.value, answers: [{ text: answer1.current.value, correct: `${rightAnswer === 'answer1'}` }, { text: answer2.current.value, correct: `${rightAnswer === 'answer2'}` },{ text: answer3.current.value, correct: `${rightAnswer === 'answer3'}` }, { text: answer4.current.value, correct: `${rightAnswer === 'answer4'}` }] })
         }if(answer1.current.value != '' && answer2.current.value != '' && answer3.current.value != ''){
-            return addQuestion({text: question.current.value, answer1: { text: answer1.current.value, correct: `${rightAnswer === 'answer1'}` },answer2: { text: answer2.current.value, correct: `${rightAnswer === 'answer2'}` },answer3: { text: answer3.current.value, correct: `${rightAnswer === 'answer3'}` } })
+            return addQuestion({text: question.current.value, answers: [{ text: answer1.current.value, correct: `${rightAnswer === 'answer1'}` }, { text: answer2.current.value, correct: `${rightAnswer === 'answer2'}` },{ text: answer3.current.value, correct: `${rightAnswer === 'answer3'}` }] })
         }if(answer1.current.value != '' && answer2.current.value != ''){
-            return addQuestion({text: question.current.value, answer1: { text: answer1.current.value, correct: `${rightAnswer === 'answer1'}` },answer2: { text: answer2.current.value, correct: `${rightAnswer === 'answer2'}` }})
+            return addQuestion({text: question.current.value, answers: [{ text: answer1.current.value, correct: `${rightAnswer === 'answer1'}` }, { text: answer2.current.value, correct: `${rightAnswer === 'answer2'}` }] })
         }
     }
     

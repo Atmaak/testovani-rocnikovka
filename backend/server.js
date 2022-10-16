@@ -44,3 +44,11 @@ app.post('/teacher/createTest', async (req, res) => {
 app.get('/student/getAllTests', async (req, res) => {
     res.send(await test.getAllTests())
 })
+
+app.post('/student/getTest' , async (req, res) => {
+    res.send(await test.getTest(req.body))
+})
+
+app.post('/teacher/getTestFromAccount', async (req, res) => {
+    res.send(await account.getTestsFromAccount(req.body))
+})

@@ -9,6 +9,8 @@ import SignUp from './components/SignUp'
 import AdminSection from "./components/AdminSection";
 import Profile from "./components/Profile";
 import CreateTest from "./components/CreateTest";
+import Test from "./components/Test";
+import ShowTest from "./components/ShowTest";
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
         <Route path="/adminsection" element={<PrivateRoute admin={true}><AdminSection /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
         <Route path="/createTest" element={<PrivateRoute><CreateTest /></PrivateRoute>}/>
+        <Route path="/showTest" element={<PrivateRoute><ShowTest /></PrivateRoute>}/>
+        <Route path="/test" element={<Test />} />
     </Routes>
     </>
   );

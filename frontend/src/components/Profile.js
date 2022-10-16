@@ -2,8 +2,6 @@ import React from 'react'
 import { useDataContext } from  '../context/DataContext'
 import { Button, Container, Card } from 'react-bootstrap'
 
-import img from '../images/student.jpg'
-
 const Profile = () => {
     const { DarkMode, teacher, teacherLogOut } = useDataContext()
   return (

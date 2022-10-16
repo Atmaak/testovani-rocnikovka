@@ -20,6 +20,7 @@ const getAllTests = () => {
 }
 
 const createTest = async (data) => {
+  //console.log(data.test.questions)
   con.query(`INSERT INTO tests(name, invite_code, id_user, id_grading, quantity_of_questions) VALUES ('${data.test.name}', '${makeInviteCode()}', ${data.teacher.id_user}, 1, ${data.test.quantity_of_questions})`)
   const id_test = await new Promise(resolve => {
     con.query('SELECT max(id_test) as id_test FROM tests', (err, result) => {
@@ -27,10 +28,48 @@ const createTest = async (data) => {
     })
   })
   let field = data.test.questions
-  field.map((question) => (
-    con.query(`INSERT INTO answers(id_test, text, correct) VALUES (${id_test}, '${question.text}', '${question.correct}')`)
-  )) 
+  field.map(async (question) => {
+    console.log(question)
+    con.query(`INSERT INTO questions(id_test, text) VALUES (${id_test},'${question.text}')`)
+
+    let id_question = await new Promise(resolve => {
+      con.query('SELECT max(id_question) as id_question FROM questions', (err, result) => {
+        resolve(result[0].id_question)
+      })
+    })
+    console.log(id_question)
+    let xd = question.answers
+    xd.map((answer) => {
+      return con.query(`INSERT INTO answers(id_question, text, correct) VALUES (${id_question}, '${answer.text}', '${answer.correct}')`)
+    })
+    
+  
+  }) 
   return data;
+}
+
+const getTest = async (data) =>  {
+  const getAnswers = () => {
+    return new Promise(resolve => {
+      con.query(`SELECT * FROM answers_to_test where id_test = ${data.test.id_test}`, (err, result) => {
+        return resolve(result)
+      })
+    })
+  }
+
+  const getQuestions = () => {
+    return new Promise(resolve => {
+      con.query(`SELECT * FROM questions where id_test = ${data.test.id_test}`, (err, result) => {
+        return resolve(result)
+      })
+    })
+  }
+
+  return {
+    test: data.test,
+    test_questions: await getQuestions(),
+    test_answers: await getAnswers()
+  }
 }
 
 const  makeInviteCode = (length = 16) => {
@@ -45,5 +84,6 @@ const  makeInviteCode = (length = 16) => {
 
 module.exports = {
   getAllTests,
-  createTest
+  createTest,
+  getTest
 }
