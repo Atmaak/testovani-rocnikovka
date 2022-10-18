@@ -19,10 +19,10 @@ const Student = () => {
             return el;
         }
         else {
-            return (el.invite_code).toLowerCase().includes(val)
+            return (el.invite_code).toLowerCase().includes(val.toLowerCase())
         }
     })
-    setShownData(filteredData.sort((a, b) => a.name.localeCompare(b.name)))
+    setShownData(filteredData.sort((a, b) => a.invite_code.localeCompare(b.invite_code)))
   }
 
   const handleClick = async (test) => {
