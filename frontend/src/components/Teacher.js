@@ -4,14 +4,17 @@ import { Container, Button } from 'react-bootstrap'
 
 import { useNavigate } from 'react-router-dom'
 const Teacher = () => {
-  const { DarkMode, textModeColor, testOnAccount, setShowOwnTest } = useDataContext() 
+  const { DarkMode, textModeColor, testOnAccount, getTeacherTest } = useDataContext() 
   const history = useNavigate()
   const goToLink = (link) => {
     history(link)
   }
   const handleClick = (test) => {
-    setShowOwnTest(test)
+    getTeacherTest(test)
     history('/showTest')
+  }
+
+  const handleSend = () => {
   }
   return (
     <>
@@ -25,7 +28,7 @@ const Teacher = () => {
                   <div className='display-4 text-capitalize mb-3 mx-3'>{test.name}</div>
                   <div className='m-3'>{test.invite_code}</div>
                   <div className='d-flex justify-content-end'>
-                    <Button size={'lg'} className='m-3' variant={textModeColor}>Poslat test</Button>
+                    <Button size={'lg'} className='m-3' variant={textModeColor} onClick={handleSend}>Poslat test</Button>
                     <Button size={'lg'} className='m-3' variant={textModeColor} onClick={() => handleClick(test)}>Zobrazit</Button>
                   </div>
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import { useDataContext } from '../context/DataContext'
-import { Card, Form, Button } from 'react-bootstrap'
+import { Card, Form, Button, Container } from 'react-bootstrap'
 const Test = () => {
     const { DarkMode, textModeColor, shownTest } = useDataContext()
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
-        {shownTest && <Card className={`bg-${DarkMode} text-${textModeColor} text-center d-flex justify-content-center flex-column`}>
+        <Container>
+        {shownTest && <Card className={`bg-${DarkMode} text-${textModeColor} text-center d-flex justify-content-center flex-column border-0`}>
           <Card.Title className='text-center display-4 text-capitalize'>{shownTest.test.name}</Card.Title>
           <Card.Body className="text-center d-flex justify-content-center flex-column">
             {console.log(shownTest)}
@@ -35,6 +36,7 @@ const Test = () => {
           }))}
           </Card.Body> 
         </Card>}
+        </Container>
     </div>
   )
 }

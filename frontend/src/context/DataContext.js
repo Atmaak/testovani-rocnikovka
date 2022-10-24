@@ -25,7 +25,7 @@ export function DataProvider({ children }){
     //teacher
     const [teacher, setTeacher] = useState()
     const [testOnAccount, setTestsOnAccount] = useState([])
-    const [shownOwnTest, setShowOwnTest] = useState([])
+    const [shownOwnTest, setShowOwnTest] = useState()
     //admin
     const [accounts, setAccounts] = useState()
 
@@ -40,6 +40,10 @@ export function DataProvider({ children }){
     useEffect(() => {
         getTestsFromAccount()
     }, [teacher])
+
+    useEffect(()=>{
+        console.log(shownOwnTest)
+    }, [shownOwnTest])
 
     const onChangeDarkMode = () => {
         if(DarkMode === 'dark') {
@@ -82,6 +86,16 @@ export function DataProvider({ children }){
         let data = await res.json()
         await setTestsOnAccount(data)
         console.log(data)
+    }
+
+    const getTeacherTest = async (test) => {
+        let res = await fetch('http://localhost:3001/student/getTest', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({test: test})
+        })
+        let data = await res.json()
+        setShowOwnTest(data)
     }
 
     const teacherLogin = async (email, password) => {
@@ -182,7 +196,7 @@ export function DataProvider({ children }){
         setShownTest,
         getTest,
         testOnAccount,
-        setShowOwnTest,
+        getTeacherTest,
         shownOwnTest
     }
 
