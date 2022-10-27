@@ -40,7 +40,6 @@ const loginToAccount = async (data) => {
 }
 
 const getTestsFromAccount = async (data) => {
-    console.log(data)
     return new Promise(resolve => {
         con.query(`SELECT * FROM tests where id_user = ${data.teacher.id_user}`, (err, result) => {
             if(err) return resolve(err)
