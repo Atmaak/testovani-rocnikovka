@@ -34,6 +34,7 @@ const Test = () => {
     newArr[data.id_question - shownTest.test_answers[0].id_question] = data.correct
     setAnswers(newArr)
   }
+
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
         <Container>
@@ -70,6 +71,7 @@ const Test = () => {
           {!submited && <Button className='mt-3' variant={textModeColor} onClick={handleSubmit} disabled={submited}>Odeslat</Button>}
           </Card.Body> 
         </Card>}
+
         </Container>
     </div>
   )

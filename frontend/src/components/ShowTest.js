@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDataContext } from '../context/DataContext'
 import { Card, Form, Button, Container } from 'react-bootstrap'
+import AddGrading from './AddGrading'
 
 const ShowTest = () => {
   const { DarkMode, textModeColor, shownOwnTest } = useDataContext()
@@ -36,6 +37,7 @@ const ShowTest = () => {
             }))}
             </Card.Body> 
           </Card>}
+          <AddGrading />
         </Container>
     </div>
   )
