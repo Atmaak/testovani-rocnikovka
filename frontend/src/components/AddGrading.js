@@ -28,18 +28,18 @@ const AddGrading = () => {
     if(four.current.value <= 0 || three.current.value < four.current.value) return setErr('Špatně zadána 4!')
     //if(five.current.value < 0 || four.current.value < 0)  return setErr('kokot')
     setPieChartData([
-      { title: 'Jednička', value: parseInt(100 - one.current.value),range: `${100}% - ${one.current.value}%`, color: '#1fea00' },
-      { title: 'Dvojka', value: parseInt(one.current.value - two.current.value), range: `${one.current.value}% - ${two.current.value}%`, color: '#27a102' },
-      { title: 'Trojka', value: parseInt(two.current.value - three.current.value), range: `${two.current.value}% - ${three.current.value}%`, color: '#1c6000' },
-      { title: 'Čtyřka', value: parseInt(three.current.value - four.current.value), range: `${three.current.value}% - ${four.current.value}%`, color: '#002f06' },
-      { title: 'Pětka', value: parseInt(four.current.value - 0), range: `${four.current.value}% - ${0}%`, color: '#000000' }
+      { title: 'Jednička', value: parseFloat(100 - one.current.value),range: `${100}% - ${one.current.value}%`, color: '#1fea00' },
+      { title: 'Dvojka', value: parseFloat(one.current.value - two.current.value), range: `${one.current.value}% - ${two.current.value}%`, color: '#27a102' },
+      { title: 'Trojka', value: parseFloat(two.current.value - three.current.value), range: `${two.current.value}% - ${three.current.value}%`, color: '#1c6000' },
+      { title: 'Čtyřka', value: parseFloat(three.current.value - four.current.value), range: `${three.current.value}% - ${four.current.value}%`, color: '#002f06' },
+      { title: 'Pětka', value: parseFloat(four.current.value - 0), range: `${four.current.value}% - ${0}%`, color: '#000000' }
     ])
     setErr('')
   }
   return (
     <Container className={`text-${textModeColor}`}>
       {pieChartData && <div className='d-flex w-100'>
-        <div style={{minWidth: "500px", height: "500px"}}>
+        <div style={{minWidth: "500px", minHeight: "500px"}}>
           {pieChartData.map(data => (
             <div key={data.title}>
             <div className='d-flex justify-content-between p-3 m-3' style={{backgroundColor: data.color}}>
