@@ -3,7 +3,7 @@ import { Form, Dropdown, DropdownButton, Container, Button } from 'react-bootstr
 import { CgAdd, CgOrganisation } from 'react-icons/cg'
 import { useDataContext } from '../context/DataContext'
 const CreateQuestion = ({ setNumberOfQuestions, numberOfQuestions, addQuestion}) => {
-    const { textModeColor } = useDataContext()
+    const { textDarkMode } = useDataContext()
 
     const [used, setUsed] = useState(false)
     const [rightAnswer, setRightAnswer] = useState('')
@@ -74,7 +74,7 @@ const CreateQuestion = ({ setNumberOfQuestions, numberOfQuestions, addQuestion})
                         <Form.Group id="text4" className='w-100 m-2'> <Form.Control type="text" placeholder="Odpověď" ref={answer4} disabled={used || answer3?.current.value === ''} onChange={handleTyping} /></Form.Group>
                     </div>
                 </Form.Group>
-                {!used && <Button size={'lg'} variant={textModeColor} className="w-25 h-25" type="submit">Pridat otázku</Button>}
+                {!used && <Button size={'lg'} variant={textDarkMode} className="w-25 h-25" type="submit">Pridat otázku</Button>}
                 </div>
             </Container>
         </Form>

@@ -15,14 +15,6 @@ app.listen(process.env.port, () => {
     console.log('server running on port: ' + process.env.port)
 })
 
-app.post('/teacher/createAccount', async (req, res) => {
-    res.send(await account.createAccount(req.body))
-})
-
-app.post('/teacher/loginToAccount', async (req, res) => {
-    res.send(await account.loginToAccount(req.body))
-})
-
 app.get('/admin/getAccounts', async (req, res) => {
     res.send(await admin.getAccounts())
 })
@@ -37,9 +29,8 @@ app.post('/admin/reinstateAccount', (req, res) => {
     res.sendStatus(200)
 })
 
-app.post('/teacher/createTest', async (req, res) => {
-    res.send(await test.createTest(req.body))
-})
+
+
 
 app.get('/student/getAllTests', async (req, res) => {
     res.send(await test.getAllTests())
@@ -49,6 +40,26 @@ app.post('/student/getTest' , async (req, res) => {
     res.send(await test.getTest(req.body))
 })
 
+
+
+
+app.post('/teacher/createAccount', async (req, res) => {
+    res.send(await account.createAccount(req.body))
+})
+
+app.post('/teacher/loginToAccount', async (req, res) => {
+    res.send(await account.loginToAccount(req.body))
+})
+
+app.post('/teacher/createTest', async (req, res) => {
+    res.send(await test.createTest(req.body))
+})
+
 app.post('/teacher/getTestFromAccount', async (req, res) => {
     res.send(await account.getTestsFromAccount(req.body))
+})
+
+app.post('/teacher/addGradingToTest', (req, res) => {
+    test.addGrading(req.body)
+    res.sendStatus(200)
 })

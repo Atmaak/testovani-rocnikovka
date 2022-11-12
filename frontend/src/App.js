@@ -12,6 +12,7 @@ import Profile from "./components/Profile";
 import CreateTest from "./components/CreateTest";
 import Test from "./components/Test";
 import ShowTest from "./components/ShowTest";
+import AddGrading from "./components/ChangeGrading";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
         <Route path="/createTest" element={<PrivateRoute><CreateTest /></PrivateRoute>}/>
         <Route path="/showTest" element={<PrivateRoute><ShowTest /></PrivateRoute>}/>
+        <Route path="/changeGrading" element={<PrivateRoute><AddGrading /></PrivateRoute>}/>
         <Route path="/test" element={<Test />} />
     </Routes>
     </>

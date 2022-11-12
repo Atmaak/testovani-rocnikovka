@@ -10,7 +10,7 @@ const CreateTest = () => {
   const [questions, setQuestions] = useState([])
   
   const history = useNavigate()
-  const { DarkMode, textModeColor, createTest } = useDataContext()
+  const { DarkMode, textDarkMode, createTest } = useDataContext()
 
 
   const name = useRef()
@@ -38,7 +38,7 @@ const CreateTest = () => {
   }
 
   return (
-    <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textModeColor}`}>
+    <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textDarkMode}`}>
       <Container>
       <div className='text-center display-2'>Vytvořit test</div>
       <div className='w-100 text-center'>
@@ -53,7 +53,7 @@ const CreateTest = () => {
           {CreateQuestions?.map(q => (
             <CreateQuestion key={q} setNumberOfQuestions={setNumberOfQuestions} numberOfQuestions={numberOfQuestions} addQuestion={addQuestion} />
           ))}
-          <div style={{textAlign: 'center'}} className="w-100 h-50 mt-3"><Button size={'lg'} variant={textModeColor} className="w-25 h-25" onClick={handleCreateTest}>Vytvořit nový test</Button></div>
+          <div style={{textAlign: 'center'}} className="w-100 h-50 mt-3"><Button size={'lg'} variant={textDarkMode} className="w-25 h-25" onClick={handleCreateTest}>Vytvořit nový test</Button></div>
         </div>
       </div>
       </Container>

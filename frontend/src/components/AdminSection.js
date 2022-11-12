@@ -4,7 +4,7 @@ import { Container, Table, Button } from 'react-bootstrap'
 import { GrStatusDisabled, GrStatusGood } from 'react-icons/gr'
 
 const AdminSection = () => {
-  const { DarkMode, textModeColor, accounts, adminDeleteAccount, adminReinstateAccount, loading, getAccounts } = useDataContext()
+  const { DarkMode, textDarkMode, accounts, adminDeleteAccount, adminReinstateAccount, loading, getAccounts, teacher } = useDataContext()
   const buttonCustomStyles = {
     "width": "1500px"
   }
@@ -16,7 +16,7 @@ const AdminSection = () => {
 
   return (
     <>
-      <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textModeColor}`}>
+      <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textDarkMode}`}>
         <Container>
         <Table striped bordered hover variant={DarkMode}>
           <thead>
@@ -39,7 +39,7 @@ const AdminSection = () => {
                <th>{acc.email}</th>
                <th>{new Date(acc.timestamp).toLocaleDateString() }</th>
                <th className='text-center'>{acc.isDeleted == 1 ? <GrStatusDisabled className={`bg-light rounded`} size='2rem' /> : <GrStatusGood className={`bg-light rounded-circle`} size='2rem'/>}</th>
-               <th className='text-center'>{acc.isDeleted == 1 ? <button styles={buttonCustomStyles} onClick={() =>adminReinstateAccount(acc.id_user)} disabled={loading} variant='light' className='rounded-circle p-0'><GrStatusGood size='2rem'/></button> : <button styles={buttonCustomStyles} onClick={() =>adminDeleteAccount(acc.id_user)} disabled={loading} variant='light' className='rounded p-0'><GrStatusDisabled size='2rem'/></button>}</th>
+               <th className='text-center'>{acc.isDeleted == 1 ? <button styles={buttonCustomStyles} onClick={() =>adminReinstateAccount(acc.id_user)} disabled={loading || acc.id_user == teacher.id_user} variant='light' className='rounded-circle p-0'><GrStatusGood size='2rem'/></button> : <button styles={buttonCustomStyles} onClick={() =>adminDeleteAccount(acc.id_user)} disabled={loading || acc.id_user == teacher.id_user} variant='light' className='rounded p-0'><GrStatusDisabled size='2rem'/></button>}</th>
              </tr>
             ))}
           </tbody>

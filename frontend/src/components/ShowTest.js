@@ -1,21 +1,22 @@
 import { useEffect } from 'react'
 import { useDataContext } from '../context/DataContext'
 import { Card, Form, Button, Container } from 'react-bootstrap'
-import AddGrading from './AddGrading'
+import { useNavigate } from 'react-router-dom'
 
 const ShowTest = () => {
-  const { DarkMode, textModeColor, shownOwnTest } = useDataContext()
+  const history = useNavigate()
+  const { DarkMode, textDarkMode, shownOwnTest } = useDataContext()
   useEffect(() => {
-    console.log(shownOwnTest)
-  }, [shownOwnTest]);
+    if(!shownOwnTest) return history('/')
+  }, []);
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
         <Container>
-          {shownOwnTest && <Card className={`bg-${DarkMode} text-${textModeColor} text-center d-flex justify-content-center flex-column border-0`}>
+          {shownOwnTest && <Card className={`bg-${DarkMode} text-${textDarkMode} text-center d-flex justify-content-center flex-column border-0`}>
             <Card.Title className='text-center display-4 text-capitalize'>{shownOwnTest.test.name}</Card.Title>
             <Card.Body className="text-center d-flex justify-content-center flex-column">
             {(shownOwnTest.test_questions).map((question => {
-              return (<div key={question.id_question} className={`border border-2 border-${textModeColor} w-100 mr-3 mt-3`}>
+              return (<div key={question.id_question} className={`border border-2 border-${textDarkMode} w-100 mr-3 mt-3`}>
                 <div className='display-5 text-capitalize'>{question.text}</div>
                   {(shownOwnTest.test_answers).map((answer) => {
                     return (
@@ -37,7 +38,6 @@ const ShowTest = () => {
             }))}
             </Card.Body> 
           </Card>}
-          <AddGrading />
         </Container>
     </div>
   )

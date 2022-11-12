@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useDataContext } from '../context/DataContext'
 import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+
 const Test = () => {
-  const { DarkMode, textModeColor, shownTest } = useDataContext()
+  const { DarkMode, textDarkMode, shownTest } = useDataContext()
   const [answers, setAnswers] = useState([])
   const [grade, setGrade] = useState(0)
   const [submited, setSubmited] = useState(false)
   const [err, setErr] = useState()
+  const [grades, setGrades] = useState([])
+  const history = useNavigate()
 
+  useEffect(() => {
+    if(!shownTest) return history('/')
+    setGrades([shownTest.test_grades[0].percentage, shownTest.test_grades[1].percentage, shownTest.test_grades[2].percentage, shownTest.test_grades[3].percentage])
+  }, [])
   const handleSubmit = () => {
-    const grades = [80, 60, 40, 20, 0]
     let right = 0
     let wrong = 0
     answers.map((answer) => {
@@ -24,7 +31,7 @@ const Test = () => {
     else if(percantage >= grades[1]) setGrade({grade: 2, percantage})
     else if(percantage >= grades[2]) setGrade({grade: 3, percantage})
     else if(percantage >= grades[3]) setGrade({grade: 4, percantage})
-    else if(percantage >= grades[4]) setGrade({grade: 5, percantage})
+    else if(percantage >= 0) setGrade({grade: 5, percantage})
     setErr('')
   }
 
@@ -38,11 +45,11 @@ const Test = () => {
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
         <Container>
-        {shownTest && <Card className={`bg-${DarkMode} text-${textModeColor} text-center d-flex justify-content-center flex-column border-0`}>
+        {shownTest && <Card className={`bg-${DarkMode} text-${textDarkMode} text-center d-flex justify-content-center flex-column border-0`}>
           <Card.Title className='text-center display-4 text-capitalize'>{shownTest.test.name}</Card.Title>
           <Card.Body className="text-center d-flex justify-content-center flex-column">
           {(shownTest.test_questions).map((question => {
-            return (<div key={question.id_question} className={`border border-2 border-${textModeColor} w-100 mr-3 mt-3`}>
+            return (<div key={question.id_question} className={`border border-2 border-${textDarkMode} w-100 mr-3 mt-3`}>
               <div className='display-5 text-capitalize'>{question.text}</div>
               <Form>
                 {(shownTest.test_answers).map((answer) => {
@@ -68,7 +75,7 @@ const Test = () => {
           }))}
           <div className='mt-3'>{grade.grade > 0 && <Alert className={`w-100 display-1 text-dark`} variant={'success'}><div>Známka: {grade.grade}</div><div>Procenta: {grade.percantage} %</div></Alert> }</div>
           {err && <Alert className={`w-100 display-2 text-dark`} variant={'danger'}>{err}</Alert>}
-          {!submited && <Button className='mt-3' variant={textModeColor} onClick={handleSubmit} disabled={submited}>Odeslat</Button>}
+          {!submited && <Button className='mt-3' variant={textDarkMode} onClick={handleSubmit} disabled={submited}>Odeslat</Button>}
           </Card.Body> 
         </Card>}
 

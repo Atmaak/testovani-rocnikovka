@@ -20,7 +20,6 @@ const getAllTests = () => {
 }
 
 const createTest = async (data) => {
-  //console.log(data.test.questions)
   con.query(`INSERT INTO tests(name, invite_code, id_user, id_grading, quantity_of_questions) VALUES ('${data.test.name}', '${makeInviteCode()}', ${data.teacher.id_user}, 1, ${data.test.quantity_of_questions})`)
   const id_test = await new Promise(resolve => {
     con.query('SELECT max(id_test) as id_test FROM tests', (err, result) => {
@@ -29,7 +28,6 @@ const createTest = async (data) => {
   })
   let field = data.test.questions
   field.map(async (question) => {
-    console.log(question)
     con.query(`INSERT INTO questions(id_test, text) VALUES (${id_test},'${question.text}')`)
 
     let id_question = await new Promise(resolve => {
@@ -37,7 +35,6 @@ const createTest = async (data) => {
         resolve(result[0].id_question)
       })
     })
-    console.log(id_question)
     let xd = question.answers
     xd.map((answer) => {
       return con.query(`INSERT INTO answers(id_question, text, correct) VALUES (${id_question}, '${answer.text}', '${answer.correct}')`)
@@ -65,11 +62,36 @@ const getTest = async (data) =>  {
     })
   }
 
+  const getGrading = () => {
+    return new Promise(resolve => {
+      con.query(`SELECT * FROM grades where id_grading = ${data.test.id_grading}`, (err, result) => {
+        return resolve(result)
+      })
+    })
+  }
+
   return {
     test: data.test,
     test_questions: await getQuestions(),
-    test_answers: await getAnswers()
+    test_answers: await getAnswers(),
+    test_grades: await getGrading()
   }
+}
+
+const addGrading = async (data) => {
+  con.query(`INSERT INTO grading(id_user) VALUES (${data.teacher.id_user})`)
+  let id_grading = await new Promise(resolve => {
+    con.query('SELECT max(id_grading) as id_grading FROM grading', (err, result) => {
+      resolve(result[0].id_grading)
+    })
+  })
+
+  data.grades.map((grade, index) => {
+    con.query(`INSERT INTO grades(id_grading, grade, percentage) VALUES (${id_grading}, ${index+1}, ${grade})`)
+  })
+
+  con.query(`UPDATE tests SET id_grading=${id_grading} WHERE id_test = ${data.test.test.id_test}`)
+
 }
 
 const  makeInviteCode = (length = 16) => {
@@ -85,5 +107,6 @@ const  makeInviteCode = (length = 16) => {
 module.exports = {
   getAllTests,
   createTest,
-  getTest
+  getTest,
+  addGrading
 }

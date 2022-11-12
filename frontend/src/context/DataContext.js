@@ -13,7 +13,7 @@ export function DataProvider({ children }){
     const history = useNavigate()
 
     const [DarkMode, setDarkMode] = useState('dark')
-    const [textModeColor, setTextModeColor] = useState('light')
+    const [textDarkMode, settextDarkMode] = useState('light')
     const [cookies, setCookies, removeCookies] = useCookies()
     const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -47,11 +47,11 @@ export function DataProvider({ children }){
 
     const onChangeDarkMode = () => {
         if(DarkMode === 'dark') {
-            setTextModeColor('dark')
+            settextDarkMode('dark')
             return setDarkMode('light')
         }
         if(DarkMode === 'light'){
-            setTextModeColor('light')
+            settextDarkMode('light')
             return setDarkMode('dark')
         }
     }
@@ -95,7 +95,7 @@ export function DataProvider({ children }){
             body: JSON.stringify({test: test})
         })
         let data = await res.json()
-        setShowOwnTest(data)
+        await setShowOwnTest(data)
     }
 
     const teacherLogin = async (email, password) => {
@@ -142,6 +142,16 @@ export function DataProvider({ children }){
         getTests()
     }
 
+    const addGrading = (data) => {
+        let dataToSend = { user: teacher, grades: data }
+        fetch('http://localhost:3001/teacher/addGradingToTest', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({teacher, grades: data, test: shownTest, test: shownOwnTest})
+        })
+        console.log(dataToSend)
+    }
+
     //admin
 
     const getAccounts = async () => {
@@ -178,7 +188,7 @@ export function DataProvider({ children }){
 
     const value = {
         DarkMode,
-        textModeColor,
+        textDarkMode,
         onChangeDarkMode,
         isAdmin,
         teacher,
@@ -197,7 +207,8 @@ export function DataProvider({ children }){
         getTest,
         testOnAccount,
         getTeacherTest,
-        shownOwnTest
+        shownOwnTest,
+        addGrading
     }
 
     return (
