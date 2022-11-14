@@ -43,8 +43,6 @@ const AddGrading = () => {
   const four = useRef('30')
   const five = useRef('10')
 
-
-  console.log(one?.current.value)
   const handleClick = () => {
     if(one.current.value <= 0 || 100 < one.current.value) return setErr('Špatně zadána 1!')
     if(two.current.value <= 0 || one.current.value < two.current.value) return setErr('Špatně zadána 2!')
