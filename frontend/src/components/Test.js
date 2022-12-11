@@ -48,7 +48,7 @@ const Test = () => {
         {shownTest && <Card className={`bg-${DarkMode} text-${textDarkMode} text-center d-flex justify-content-center flex-column border-0`}>
           <Card.Title className='text-center display-4 text-capitalize'>{shownTest.test.name}</Card.Title>
           <Card.Body className="text-center d-flex justify-content-center flex-column">
-          {(shownTest.test_questions).map((question => {
+          {(shownTest.test_questions).map(((question, index) => {
             return (<div key={question.id_question} className={`border border-2 border-${textDarkMode} w-100 mr-3 mt-3`}>
               <div className='display-5 text-capitalize'>{question.text}</div>
               <Form>
@@ -70,6 +70,7 @@ const Test = () => {
                       </div>
                   )
                 })}
+                {submited && <>{answers[index] == 'true' ? <h1 className='text-success'>Správně</h1> : <h1 className='text-danger'>Špatně</h1>}</>}
               </Form>
             </div>)
           }))}

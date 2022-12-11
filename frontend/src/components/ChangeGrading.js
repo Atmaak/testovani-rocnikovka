@@ -28,13 +28,6 @@ const AddGrading = () => {
     three.current.value = grades[2].percentage
     four.current.value = grades[3].percentage
     five.current.value = grades[4].percentage
-    /* [
-      { title: 'Jednička', value: 20,range: '100% - 80%', color: '#1fea00' },
-      { title: 'Dvojka', value: 20, range: '80% - 60%', color: '#27a102' },
-      { title: 'Trojka', value: 20, range: '60% - 40%', color: '#1c6000' },
-      { title: 'Čtyřka', value: 20, range: '40% - 20%', color: '#002f06' },
-      { title: 'Pětka', value: 20, range: '20% - 0%', color: '#000000' }
-    ] */
   }, [])
 
   const one = useRef('80')
@@ -48,7 +41,6 @@ const AddGrading = () => {
     if(two.current.value <= 0 || one.current.value < two.current.value) return setErr('Špatně zadána 2!')
     if(three.current.value <= 0 || two.current.value < three.current.value) return setErr('Špatně zadána 3!')
     if(four.current.value <= 0 || three.current.value < four.current.value) return setErr('Špatně zadána 4!')
-    //if(five.current.value < 0 || four.current.value < 0)  return setErr('kokot')
     setPieChartData([
       { title: 'Jednička', value: parseFloat(100 - one.current.value),range: `${100}% - ${one.current.value}%`, color: '#1fea00' },
       { title: 'Dvojka', value: parseFloat(one.current.value - two.current.value), range: `${one.current.value}% - ${two.current.value}%`, color: '#27a102' },
