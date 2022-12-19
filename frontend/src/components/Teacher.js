@@ -22,6 +22,11 @@ const Teacher = () => {
     await getTeacherTest(test)
     history('/changeGrading')
   }
+  
+  const printTest = async (test) => {
+    await getTeacherTest(test)
+    history('/printTest')
+  }
   return (
     <>
       <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textDarkMode}`}>
@@ -37,6 +42,7 @@ const Teacher = () => {
                     <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={handleSend}>Poslat test</Button>
                     <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={() => handleClick(test)}>Zobrazit</Button>
                     <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={() => handleChangeGrading(test)}>Změnit známkování</Button>
+                    <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={() => printTest(test)}>Vytisknout</Button>
                   </div>
 
                 </div>

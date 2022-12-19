@@ -13,12 +13,13 @@ import CreateTest from "./components/CreateTest";
 import Test from "./components/Test";
 import ShowTest from "./components/ShowTest";
 import AddGrading from "./components/ChangeGrading";
+import PrintTest from "./components/PrintTest";
 
 function App() {
 
   return (
     <>
-      <Header />
+      <Header id="header" />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/teacher" element={<PrivateRoute><Teacher /></PrivateRoute>} />
@@ -31,6 +32,7 @@ function App() {
         <Route path="/showTest" element={<PrivateRoute><ShowTest /></PrivateRoute>}/>
         <Route path="/changeGrading" element={<PrivateRoute><AddGrading /></PrivateRoute>}/>
         <Route path="/test" element={<Test />} />
+        <Route path="/printTest" element={<PrintTest />} /> 
     </Routes>
     </>
   );

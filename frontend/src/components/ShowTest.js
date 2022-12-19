@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import { useDataContext } from '../context/DataContext'
 import { Card, Form, Button, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { jsPDF } from 'jspdf'
 
 const ShowTest = () => {
   const history = useNavigate()
@@ -11,26 +10,9 @@ const ShowTest = () => {
   useEffect(() => {
     if(!shownOwnTest) return history('/')
   }, []);
-  const saveToPdf = async () => {
-    let xd = `<div style="width:450px;">${nodeToString(testToPdf.current)}</div>` //transform: scale(1); 
-    const doc = new jsPDF({
-      format: "a4",
-      unit: "px"
-    });
-    console.log(doc.internal)
-    doc.html(xd, {
-      async callback(doc) {
-        doc.save(shownOwnTest.test.name);
-      }
-    })
+  const printTest = () => {
+    history('/printTest')
   }
-  function nodeToString ( node ) {
-    var tmpNode = document.createElement( "div" );
-    tmpNode.appendChild( node.cloneNode( true ) );
-    var str = tmpNode.innerHTML;
-    tmpNode = node = null; // prevent memory leaks in IE
-    return str;
- }
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
         <Container>
@@ -61,7 +43,7 @@ const ShowTest = () => {
             </Card.Body> 
           </Card>}
 
-          <Button onClick={saveToPdf}>Save</Button>
+          <Button onClick={printTest}>Save</Button>
         </Container>
     </div>
   )

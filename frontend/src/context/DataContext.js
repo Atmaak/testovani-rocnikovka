@@ -139,7 +139,8 @@ export function DataProvider({ children }){
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({teacher, test})
         })
-        getTests()
+        await getTests()
+        await getTestsFromAccount()
     }
 
     const addGrading = (data) => {

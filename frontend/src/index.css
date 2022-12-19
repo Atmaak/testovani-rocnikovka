@@ -3,3 +3,22 @@ input[type='radio']{
     padding: 10px;
     margin: 10px;
 }
+
+@media print {
+    #testToPdf {
+        position: absolute;
+        top: 0;
+        z-index: 900;
+        height: 100vh;
+        width: 100vw;
+        overflow: visible;
+        background-color: white;
+    }
+    button {
+        display: none;
+    }
+    div {
+        break-inside: avoid;
+    }
+}
+
