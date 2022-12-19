@@ -1,18 +1,40 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDataContext } from '../context/DataContext'
 import { Card, Form, Button, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { jsPDF } from 'jspdf'
 
 const ShowTest = () => {
   const history = useNavigate()
-  const { DarkMode, textDarkMode, shownOwnTest } = useDataContext()
+  const testToPdf = useRef()
+  const { DarkMode, textDarkMode, onChangeDarkMode, shownOwnTest } = useDataContext()
   useEffect(() => {
     if(!shownOwnTest) return history('/')
   }, []);
+  const saveToPdf = async () => {
+    let xd = `<div style="width:450px;">${nodeToString(testToPdf.current)}</div>` //transform: scale(1); 
+    const doc = new jsPDF({
+      format: "a4",
+      unit: "px"
+    });
+    console.log(doc.internal)
+    doc.html(xd, {
+      async callback(doc) {
+        doc.save(shownOwnTest.test.name);
+      }
+    })
+  }
+  function nodeToString ( node ) {
+    var tmpNode = document.createElement( "div" );
+    tmpNode.appendChild( node.cloneNode( true ) );
+    var str = tmpNode.innerHTML;
+    tmpNode = node = null; // prevent memory leaks in IE
+    return str;
+ }
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
         <Container>
-          {shownOwnTest && <Card className={`bg-${DarkMode} text-${textDarkMode} text-center d-flex justify-content-center flex-column border-0`}>
+          {shownOwnTest && <Card className={`bg-${DarkMode} text-${textDarkMode} text-center d-flex justify-content-center flex-column border-0`} ref={testToPdf}>
             <Card.Title className='text-center display-4 text-capitalize'>{shownOwnTest.test.name}</Card.Title>
             <Card.Body className="text-center d-flex justify-content-center flex-column">
             {(shownOwnTest.test_questions).map((question => {
@@ -38,6 +60,8 @@ const ShowTest = () => {
             }))}
             </Card.Body> 
           </Card>}
+
+          <Button onClick={saveToPdf}>Save</Button>
         </Container>
     </div>
   )
