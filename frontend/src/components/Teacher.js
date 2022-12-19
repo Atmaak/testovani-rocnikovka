@@ -27,6 +27,11 @@ const Teacher = () => {
     await getTeacherTest(test)
     history('/printTest')
   }
+
+  const handleAnsvers = async (test) => {
+    await getTeacherTest(test)
+    history('/archive')
+  }
   return (
     <>
       <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textDarkMode}`}>
@@ -39,10 +44,11 @@ const Teacher = () => {
                   <div className='display-4 text-capitalize mb-3 mx-3'>{test.name}</div>
                   <div className='m-3'>{test.invite_code}</div>
                   <div className='d-flex justify-content-end'>
-                    <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={handleSend}>Poslat test</Button>
-                    <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={() => handleClick(test)}>Zobrazit</Button>
-                    <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={() => handleChangeGrading(test)}>Změnit známkování</Button>
-                    <Button size={'lg'} className='m-3' variant={textDarkMode} onClick={() => printTest(test)}>Vytisknout</Button>
+                    <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={handleSend}>Poslat test</Button>
+                    <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => handleClick(test)}>Zobrazit</Button>
+                    <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => handleAnsvers(test)}>Odpovědi</Button>
+                    <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => handleChangeGrading(test)}>Změnit známkování</Button>
+                    <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => printTest(test)}>Vytisknout / Uložit jako PDF</Button>
                   </div>
 
                 </div>

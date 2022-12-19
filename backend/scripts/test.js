@@ -45,6 +45,19 @@ const createTest = async (data) => {
   return data;
 }
 
+const completeTest = async (data) => {
+  try{con.query(`INSERT INTO students_grades(id_test, email, grade, percentage) VALUES (${data.test.id_test}, '${data.email}', ${data.grade.grade}, ${data.grade.percentage} )`)}
+  catch(err) {console.log(err)}
+}
+
+const getStudentAnsvers = async (data) => {
+  return new Promise(resolve => {
+    con.query(`SELECT * FROM students_grades WHERE id_test = ${data.id_test}`, (err, result) => {
+      return resolve(result)
+    })
+  })
+}
+
 const getTest = async (data) =>  {
   const getAnswers = () => {
     return new Promise(resolve => {
@@ -108,5 +121,7 @@ module.exports = {
   getAllTests,
   createTest,
   getTest,
-  addGrading
+  addGrading,
+  completeTest,
+  getStudentAnsvers
 }

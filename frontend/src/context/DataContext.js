@@ -26,6 +26,8 @@ export function DataProvider({ children }){
     const [teacher, setTeacher] = useState()
     const [testOnAccount, setTestsOnAccount] = useState([])
     const [shownOwnTest, setShowOwnTest] = useState()
+    const [answers, setAnswers] = useState()
+
     //admin
     const [accounts, setAccounts] = useState()
 
@@ -40,10 +42,6 @@ export function DataProvider({ children }){
     useEffect(() => {
         getTestsFromAccount()
     }, [teacher])
-
-    useEffect(()=>{
-        console.log(shownOwnTest)
-    }, [shownOwnTest])
 
     const onChangeDarkMode = () => {
         if(DarkMode === 'dark') {
@@ -74,6 +72,14 @@ export function DataProvider({ children }){
         setShownTest(data)
     }
 
+    const completeTest = async (data) => {
+        fetch('http://localhost:3001/student/completeTest', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        })
+    }
+
     //teacher
 
     const getTestsFromAccount = async () => {
@@ -85,7 +91,6 @@ export function DataProvider({ children }){
         })
         let data = await res.json()
         await setTestsOnAccount(data)
-        console.log(data)
     }
 
     const getTeacherTest = async (test) => {
@@ -153,6 +158,16 @@ export function DataProvider({ children }){
         console.log(dataToSend)
     }
 
+    const getAnswers = async () => {
+        let res = await fetch('http://localhost:3001/teacher/getStudentAnsvers',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(shownOwnTest.test)
+        })
+        let data = await res.json()
+        setAnswers(data)
+    }
+
     //admin
 
     const getAccounts = async () => {
@@ -183,10 +198,6 @@ export function DataProvider({ children }){
         setLoading(false)
     }
 
-    const sleep = (milliseconds) => {
-        return new Promise(resolve => setTimeout(resolve, milliseconds))
-    }
-
     const value = {
         DarkMode,
         textDarkMode,
@@ -209,7 +220,10 @@ export function DataProvider({ children }){
         testOnAccount,
         getTeacherTest,
         shownOwnTest,
-        addGrading
+        addGrading,
+        completeTest,
+        getAnswers,
+        answers
     }
 
     return (

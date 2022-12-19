@@ -4,35 +4,49 @@ import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
 const Test = () => {
-  const { DarkMode, textDarkMode, shownTest } = useDataContext()
+  const { DarkMode, textDarkMode, shownTest, completeTest } = useDataContext()
   const [answers, setAnswers] = useState([])
   const [grade, setGrade] = useState(0)
   const [submited, setSubmited] = useState(false)
   const [err, setErr] = useState()
   const [grades, setGrades] = useState([])
+  const [email, setEmail] = useState(null)
   const history = useNavigate()
 
   useEffect(() => {
     if(!shownTest) return history('/')
     setGrades([shownTest.test_grades[0].percentage, shownTest.test_grades[1].percentage, shownTest.test_grades[2].percentage, shownTest.test_grades[3].percentage])
   }, [])
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let right = 0
     let wrong = 0
+    let mail = email
+    let _grade
     answers.map((answer) => {
       if(answer == 'true') right++
       if(answer == 'false') wrong++
     })
-
+    
     if(shownTest.test_questions.length !== wrong + right) return setErr('Nějaké otázky nejsou vyplněné')
+    if(email == null || validateEmail(email) == null) {
+      mail = prompt('Napiš svůj E-mail')
+      setEmail(mail)
+    }
+    if(mail == null) return setErr('Musíš vyplnit E-Mail!')
+    if(validateEmail(mail) == null) return setErr('Toto neni validní E-Mail!') 
     setSubmited(true)
-    let percantage = right / shownTest.test_questions.length * 100
-    if(percantage >= grades[0]) setGrade({grade: 1, percantage})
-    else if(percantage >= grades[1]) setGrade({grade: 2, percantage})
-    else if(percantage >= grades[2]) setGrade({grade: 3, percantage})
-    else if(percantage >= grades[3]) setGrade({grade: 4, percantage})
-    else if(percantage >= 0) setGrade({grade: 5, percantage})
+    let percentage = right / shownTest.test_questions.length * 100
+    if(percentage >= grades[0]) _grade = {grade: 1, percentage}
+    else if(percentage >= grades[1]) _grade = {grade: 2, percentage}
+    else if(percentage >= grades[2]) _grade = {grade: 3, percentage}
+    else if(percentage >= grades[3]) _grade = {grade: 4, percentage}
+    else if(percentage >= 0) _grade = {grade: 5, percentage}
+    setGrade(_grade)
     setErr('')
+    completeTest({grade: _grade, email: mail, test: shownTest.test})
+  }
+  const validateEmail = (email) => {
+    return String(email).toLowerCase().match( /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ )
   }
 
   const handleClick = (data) => {
@@ -74,12 +88,12 @@ const Test = () => {
               </Form>
             </div>)
           }))}
-          <div className='mt-3'>{grade.grade > 0 && <Alert className={`w-100 display-1 text-dark`} variant={'success'}><div>Známka: {grade.grade}</div><div>Procenta: {grade.percantage} %</div></Alert> }</div>
+          <div className='mt-3'>{grade.grade > 0 && <Alert className={`w-100 display-1 text-dark`} variant={'success'}><div>Známka: {grade.grade}</div><div>Procenta: {grade.percentage} %</div></Alert> }</div>
           {err && <Alert className={`w-100 display-2 text-dark`} variant={'danger'}>{err}</Alert>}
           {!submited && <Button className='mt-3' variant={textDarkMode} onClick={handleSubmit} disabled={submited}>Odeslat</Button>}
           </Card.Body> 
         </Card>}
-
+          
         </Container>
     </div>
   )

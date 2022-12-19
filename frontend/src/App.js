@@ -14,6 +14,7 @@ import Test from "./components/Test";
 import ShowTest from "./components/ShowTest";
 import AddGrading from "./components/ChangeGrading";
 import PrintTest from "./components/PrintTest";
+import Archive from "./components/Archive";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/teacher" element={<PrivateRoute><Teacher /></PrivateRoute>} />
+        <Route path="/archive" element={<PrivateRoute _shownOwnTest={true}><Archive /></PrivateRoute>} />
         <Route path="/student" element={<Student />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />

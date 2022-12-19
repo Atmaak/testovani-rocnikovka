@@ -37,12 +37,10 @@ const Student = () => {
         <div className="form-outline mx-3 d-flex justify-content-center">
             <input type="search" className="form-control w-50" placeholder="Kód pozvánky" onChange={handleSearch} ref={search}/>
         </div>
-        <div className='m-3'>{shownData?.map((test) => {
-          return <Card className='mt-3' key={test.id_test}>
+        <div className='m-3 tests'>{shownData?.map((test) => {
+          return <Card className='m-3' key={test.id_test}>
           <Card.Body className='display-6 text-center'>
-            <div>{test.name + ' '} 
-            {test.invite_code + ' '}
-            {test.quantity_of_questions}</div>
+            <div>{test.name + ' '}</div>
             <Button size={'lg'} variant={DarkMode} onClick={() => handleClick(test)}>Vyplnit</Button>
           </Card.Body>
         </Card>

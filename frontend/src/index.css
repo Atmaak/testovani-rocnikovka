@@ -22,3 +22,12 @@ input[type='radio']{
     }
 }
 
+.answers{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+}
+
+.tests{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+}

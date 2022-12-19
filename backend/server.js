@@ -40,6 +40,9 @@ app.post('/student/getTest' , async (req, res) => {
     res.send(await test.getTest(req.body))
 })
 
+app.post('/student/completeTest', async (req, res) => {
+    res.send(test.completeTest(req.body))
+})
 
 
 
@@ -62,4 +65,9 @@ app.post('/teacher/getTestFromAccount', async (req, res) => {
 app.post('/teacher/addGradingToTest', (req, res) => {
     test.addGrading(req.body)
     res.sendStatus(200)
+})
+
+app.post('/teacher/getStudentAnsvers', async (req, res) => {
+    console.log(req.body)
+    res.send(await test.getStudentAnsvers(req.body))
 })

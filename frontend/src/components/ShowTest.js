@@ -10,9 +10,6 @@ const ShowTest = () => {
   useEffect(() => {
     if(!shownOwnTest) return history('/')
   }, []);
-  const printTest = () => {
-    history('/printTest')
-  }
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
         <Container>
@@ -42,8 +39,6 @@ const ShowTest = () => {
             }))}
             </Card.Body> 
           </Card>}
-
-          <Button onClick={printTest}>Save</Button>
         </Container>
     </div>
   )
