@@ -20,7 +20,7 @@ const Profile = () => {
                         <div className='m-2'>Založen:</div>
                     </div>
                     <div className='text-end m-3'>
-                        <div className='m-2'>{teacher.name}</div>
+                        <div className='m-2 text-capitalize'>{teacher.name}</div>
                         <div className='m-2'>{teacher.email}</div>
                         <div className='m-2'>{new Date(teacher.timestamp).toLocaleDateString()}</div>
                     </div>

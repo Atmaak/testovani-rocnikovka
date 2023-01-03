@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useDataContext } from  '../context/DataContext'
 
@@ -70,6 +70,9 @@ const SignUp = () => {
                     </Form>
                 </Card.Body>
             </Card>
+            <div className={`w-100 text-center mt-2 text-${DarkMode.toLowerCase() === 'light' ? 'dark' : 'light'}`}>
+                Již máte účet? <Link to="/login">Přihlašte se</Link>
+            </div>
         </div>
     </div>
   )

@@ -107,6 +107,14 @@ const addGrading = async (data) => {
 
 }
 
+const editQuestion = (data) => {
+  con.query(`UPDATE questions SET text = '${data.question.text}' WHERE questions.id_question = ${data.question.id_question}`)
+  
+  let xddd = data.answers.map(answer => {
+    con.query(`UPDATE answers SET text = '${answer.answer_text}', correct = '${answer.correct}' WHERE answers.id_answer = ${answer.id_answer};`)
+  })
+}
+
 const  makeInviteCode = (length = 16) => {
   var result           = '';
   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -123,5 +131,6 @@ module.exports = {
   getTest,
   addGrading,
   completeTest,
-  getStudentAnsvers
+  getStudentAnsvers,
+  editQuestion
 }

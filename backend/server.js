@@ -68,6 +68,10 @@ app.post('/teacher/addGradingToTest', (req, res) => {
 })
 
 app.post('/teacher/getStudentAnsvers', async (req, res) => {
-    console.log(req.body)
     res.send(await test.getStudentAnsvers(req.body))
+})
+
+app.post('/teacher/editQuestion', async (req, res) => {
+    test.editQuestion(req.body)
+    res.sendStatus(200)
 })

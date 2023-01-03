@@ -198,6 +198,14 @@ export function DataProvider({ children }){
         setLoading(false)
     }
 
+    const editQuestion = (question) => {
+        fetch('http://localhost:3001/teacher/editQuestion', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(question)
+        })
+    }
+
     const value = {
         DarkMode,
         textDarkMode,
@@ -223,7 +231,8 @@ export function DataProvider({ children }){
         addGrading,
         completeTest,
         getAnswers,
-        answers
+        answers,
+        editQuestion
     }
 
     return (
