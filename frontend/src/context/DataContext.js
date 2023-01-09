@@ -155,7 +155,6 @@ export function DataProvider({ children }){
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({teacher, grades: data, test: shownTest, test: shownOwnTest})
         })
-        console.log(dataToSend)
     }
 
     const getAnswers = async () => {

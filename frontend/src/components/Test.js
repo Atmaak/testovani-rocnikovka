@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDataContext } from '../context/DataContext'
 import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
@@ -10,13 +10,21 @@ const Test = () => {
   const [submited, setSubmited] = useState(false)
   const [err, setErr] = useState()
   const [grades, setGrades] = useState([])
-  const [email, setEmail] = useState(null)
+  const [email, setEmail] = useState('')
+  const [emailSubmited, setEmailSubmited] = useState(false)
   const history = useNavigate()
+
+  const refMail = useRef()
 
   useEffect(() => {
     if(!shownTest) return history('/')
     setGrades([shownTest.test_grades[0].percentage, shownTest.test_grades[1].percentage, shownTest.test_grades[2].percentage, shownTest.test_grades[3].percentage])
   }, [])
+  
+  const handleTyping = () => {
+    if(validateEmail(refMail.current.value) !== null) return setEmail(refMail.current.value)
+  }
+  
   const handleSubmit = async () => {
     let right = 0
     let wrong = 0
@@ -28,12 +36,6 @@ const Test = () => {
     })
     
     if(shownTest.test_questions.length !== wrong + right) return setErr('Nějaké otázky nejsou vyplněné')
-    if(email == null || validateEmail(email) == null) {
-      mail = prompt('Napiš svůj E-mail')
-      setEmail(mail)
-    }
-    if(mail == null) return setErr('Musíš vyplnit E-Mail!')
-    if(validateEmail(mail) == null) return setErr('Toto neni validní E-Mail!') 
     setSubmited(true)
     let percentage = right / shownTest.test_questions.length * 100
     if(percentage >= grades[0]) _grade = {grade: 1, percentage}
@@ -56,12 +58,25 @@ const Test = () => {
     setAnswers(newArr)
   }
 
+  const handleSubmitMail = () => {
+    if(email) return setEmailSubmited(true)
+  }
+
   return (
     <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
         <Container>
-        {shownTest && <Card className={`bg-${DarkMode} text-${textDarkMode} text-center d-flex justify-content-center flex-column border-0`}>
-          <Card.Title className='text-center display-4 text-capitalize'>{shownTest.test.name}</Card.Title>
-          <Card.Body className="text-center d-flex justify-content-center flex-column">
+        {shownTest && <Card className={`bg-${DarkMode} text-${textDarkMode} d-flex justify-content-center flex-column border-0`}>
+          
+          <Card.Title className='display-4 text-capitalize'>{shownTest.test.name}</Card.Title>
+
+          {!emailSubmited ? <div className='justify-content-center d-flex w-100'>
+            <Form className='justify-content-center d-flex w-25 flex-column' onSubmit={(e) => {e.preventDefault(); handleSubmitMail()}}>
+              <Form.Group id="email" className="m-3 w-100">
+                <Form.Control className="" type="mail" ref={refMail} required onChange={handleTyping} style={{width: "25%", minWidth: "350px"}} placeholder="Sem zadejte svůj E-mail" />
+              </Form.Group>
+          <Button className='mx-3' variant={textDarkMode} onClick={handleSubmitMail} style={{width: "25%", minWidth: "350px"}} disabled={validateEmail(email) == null}>Pokračovat</Button>
+            </Form>
+          </div> : <Card.Body className="text-center d-flex justify-content-center flex-column">
           {(shownTest.test_questions).map(((question, index) => {
             return (<div key={question.id_question} className={`border border-2 border-${textDarkMode} w-100 mr-3 mt-3`}>
               <div className='display-5 text-capitalize'>{question.text}</div>
@@ -91,7 +106,7 @@ const Test = () => {
           <div className='mt-3'>{grade.grade > 0 && <Alert className={`w-100 display-1 text-dark`} variant={'success'}><div>Známka: {grade.grade}</div><div>Procenta: {grade.percentage} %</div></Alert> }</div>
           {err && <Alert className={`w-100 display-2 text-dark`} variant={'danger'}>{err}</Alert>}
           {!submited && <Button className='mt-3' variant={textDarkMode} onClick={handleSubmit} disabled={submited}>Odeslat</Button>}
-          </Card.Body> 
+          </Card.Body> }
         </Card>}
           
         </Container>
