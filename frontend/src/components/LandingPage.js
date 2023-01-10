@@ -21,7 +21,7 @@ const LandingPage = () => {
   }
 
   return (
-    <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} d-flex align-items-center justify-content-center`}>
+    <div style={{minHeight: "97vh"}} className={`bg-${DarkMode} d-flex align-items-center justify-content-center`}>
       <Card onClick={() => goToLink('/student')} className="m-3" style={cardStylesCustom} bg={DarkMode.toLowerCase()} text={DarkMode.toLowerCase() === 'light' ? 'dark' : 'white'}>
         <Card.Img variant="top" src={StudentImg} style={imageStylesCustom}/>
         <Card.Body>

@@ -32,7 +32,7 @@ const Student = () => {
   }
   return (
     <>
-      <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
+      <div style={{minHeight: "97vh"}} className={`bg-${DarkMode}`}>
         <Container>
         <div className="form-outline mx-3 d-flex justify-content-center">
             <input type="search" className="form-control w-50" placeholder="Kód pozvánky" onChange={handleSearch} ref={search}/>

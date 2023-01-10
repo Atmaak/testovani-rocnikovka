@@ -38,7 +38,7 @@ const CreateTest = () => {
   }
 
   return (
-    <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} text-${textDarkMode}`}>
+    <div style={{minHeight: "97vh"}} className={`bg-${DarkMode} text-${textDarkMode}`}>
       <Container>
       <div className='text-center display-2'>Vytvořit test</div>
       <div className='w-100 text-center'>

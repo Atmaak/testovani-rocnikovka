@@ -52,7 +52,7 @@ const completeTest = async (data) => {
 
 const getStudentAnsvers = async (data) => {
   return new Promise(resolve => {
-    con.query(`SELECT * FROM students_grades WHERE id_test = ${data.id_test}`, (err, result) => {
+    con.query(`SELECT * FROM students_grades WHERE id_test = ${data.id_test} ORDER BY id_student_grade DESC`, (err, result) => {
       return resolve(result)
     })
   })

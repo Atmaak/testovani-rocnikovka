@@ -13,7 +13,7 @@ const ShowTest = () => {
     if(!shownOwnTest) return history('/')
   }, []);
   return (
-    <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
+    <div style={{minHeight: "97vh"}} className={`bg-${DarkMode}`}>
         <Container>
           {shownOwnTest && <Card className={`bg-${DarkMode} text-${textDarkMode} text-center d-flex justify-content-center flex-column border-0`} ref={testToPdf}>
             <Card.Title className='text-center display-4 text-capitalize'>{shownOwnTest.test.name}</Card.Title>

@@ -55,7 +55,7 @@ const AddGrading = () => {
     setErr('')
   }
   return (
-    <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
+    <div style={{minHeight: "97vh"}} className={`bg-${DarkMode}`}>
     {!loading && <Container className={`text-${textDarkMode}`}>
       {pieChartData && <div className='d-flex w-100'>
         <div style={{minWidth: "500px", minHeight: "500px"}}>

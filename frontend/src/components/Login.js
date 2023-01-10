@@ -39,7 +39,7 @@ const Login = () => {
     
   return (
     <>
-    <div className={`bg-${DarkMode} d-flex align-items-center justify-content-center h-75`} style={{minHeight: "95.5vh"}}> 
+    <div className={`bg-${DarkMode} d-flex align-items-center justify-content-center h-75`} style={{minHeight: "97vh"}}> 
         <div className="w-100" style={{maxWidth: "400px"}}>
             <Card>
                 <Card.Body>

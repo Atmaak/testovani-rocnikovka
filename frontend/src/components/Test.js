@@ -63,7 +63,7 @@ const Test = () => {
   }
 
   return (
-    <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode}`}>
+    <div style={{minHeight: "97vh"}} className={`bg-${DarkMode}`}>
         <Container>
         {shownTest && <Card className={`bg-${DarkMode} text-${textDarkMode} d-flex justify-content-center flex-column border-0`}>
           

@@ -6,8 +6,8 @@ const Profile = () => {
     const { DarkMode, teacher, teacherLogOut } = useDataContext()
   return (
     <>
-      <div style={{minHeight: "95.5vh"}} className={`bg-${DarkMode} `}>
-        <Container>
+      <div style={{minHeight: "97vh"}} className={`bg-${DarkMode} `}>
+        {teacher && <Container>
           <Card className="w-100">
             <Card.Title className="display-1 text-center">
                 Profil
@@ -17,7 +17,7 @@ const Profile = () => {
                     <div className='text-start m-3'>
                         <div className='m-2'>Jméno:</div>
                         <div className='m-2'>E-mail:</div>
-                        <div className='m-2'>Založen:</div>
+                        <div className='m-2'>Účet založen:</div>
                     </div>
                     <div className='text-end m-3'>
                         <div className='m-2 text-capitalize'>{teacher.name}</div>
@@ -28,7 +28,7 @@ const Profile = () => {
             </Card.Body>
             <Button onClick={teacherLogOut} variant={DarkMode} className={`border border-${DarkMode.toLowerCase() === 'light' ? 'dark' : 'light'}`}>Ohlásit se</Button>
           </Card>
-        </Container>
+        </Container>}
       </div>
     </>
   )
