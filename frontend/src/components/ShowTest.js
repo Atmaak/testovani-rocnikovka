@@ -40,7 +40,7 @@ const ShowTest = () => {
                         </div>
                     )
                   })}
-                  <Button onClick={() => setEditing(question.id_question)}>Edit</Button>
+                  <Button onClick={() => setEditing(question.id_question)} variant={textDarkMode} className="m-3 w-50">Edit</Button>
               </div>)
             }))}
             </Card.Body> 

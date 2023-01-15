@@ -35,7 +35,7 @@ const Student = () => {
       <div style={{minHeight: "97vh"}} className={`bg-${DarkMode}`}>
         <Container>
         <div className="form-outline mx-3 d-flex justify-content-center">
-            <input type="search" className="form-control w-50" placeholder="Kód pozvánky" onChange={handleSearch} ref={search}/>
+            <input type="search" className="form-control w-50" placeholder="Jméno testu" onChange={handleSearch} ref={search}/>
         </div>
         <div className='m-3 tests'>{shownData?.map((test) => {
           return <Card className='m-3' key={test.id_test}>
