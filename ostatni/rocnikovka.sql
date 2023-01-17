@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Úte 03. led 2023, 21:03
+-- Vytvořeno: Úte 17. led 2023, 16:25
 -- Verze serveru: 10.4.24-MariaDB
 -- Verze PHP: 8.1.6
 
@@ -39,13 +39,21 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id_answer`, `id_question`, `text`, `correct`) VALUES
-(1, 1, 'XDDDD', 'true'),
-(2, 1, 'XDDA', 'false'),
-(3, 1, 'XDDB', 'false'),
-(4, 2, 'adsa', 'false'),
-(5, 2, 'XASDASDASDA', 'true'),
-(6, 2, 'asdasd', 'false'),
-(7, 2, 'asdasd', 'false');
+(21, 7, 'Odpověď', 'true'),
+(22, 7, 'Špatná Odpověď', 'false'),
+(23, 7, 'Špatná Odpověď', 'false'),
+(24, 7, 'Špatná Odpověď', 'false'),
+(25, 8, 'Špatná Odpověď', 'false'),
+(26, 8, 'Odpověď', 'true'),
+(27, 8, 'Špatná Odpověď', 'false'),
+(28, 9, 'Špatná Odpověď', 'false'),
+(29, 9, 'Špatná Odpověď', 'false'),
+(30, 9, 'Špatná Odpověď', 'false'),
+(31, 9, 'Odpověď', 'true'),
+(32, 10, 'Špatná Odpověď', 'false'),
+(33, 10, 'Odpověď', 'true'),
+(34, 11, 'Špatná Odpověď', 'false'),
+(35, 11, 'Odpověď', 'true');
 
 -- --------------------------------------------------------
 
@@ -83,33 +91,8 @@ INSERT INTO `grades` (`id_grade`, `id_grading`, `grade`, `percentage`) VALUES
 (1, 1, 1, 80),
 (2, 1, 2, 60),
 (3, 1, 3, 40),
-(4, 1, 4, 30),
-(5, 1, 5, 10),
-(6, 2, 1, 90),
-(7, 2, 2, 50),
-(8, 2, 3, 40),
-(9, 2, 4, 30),
-(10, 2, 5, 10),
-(11, 3, 1, 95),
-(12, 3, 2, 50),
-(13, 3, 3, 40),
-(14, 3, 4, 30),
-(15, 3, 5, 10),
-(16, 4, 1, 95),
-(17, 4, 2, 50),
-(18, 4, 3, 40),
-(19, 4, 4, 30),
-(20, 4, 5, 5),
-(21, 5, 1, 95),
-(22, 5, 2, 50),
-(23, 5, 3, 40),
-(24, 5, 4, 30),
-(25, 5, 5, 5),
-(26, 6, 1, 95),
-(27, 6, 2, 50),
-(28, 6, 3, 40),
-(29, 6, 4, 4),
-(30, 6, 5, 5);
+(4, 1, 4, 20),
+(5, 1, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -128,12 +111,7 @@ CREATE TABLE `grading` (
 --
 
 INSERT INTO `grading` (`id_grading`, `id_user`, `timestamp`) VALUES
-(1, 1, '2022-11-12 18:28:50'),
-(2, 1, '2022-12-20 16:41:20'),
-(3, 1, '2022-12-30 20:08:07'),
-(4, 1, '2022-12-30 20:08:12'),
-(5, 1, '2022-12-30 20:08:14'),
-(6, 1, '2022-12-30 20:08:27');
+(1, 1, '2022-11-12 18:28:50');
 
 -- --------------------------------------------------------
 
@@ -152,8 +130,11 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id_question`, `id_test`, `text`) VALUES
-(1, 1, 'XDDDD'),
-(2, 1, 'XASDASDASDA');
+(7, 4, 'Otázka'),
+(8, 4, 'Otázka'),
+(9, 4, 'Otázka'),
+(10, 4, 'Otázka'),
+(11, 4, 'Otázka');
 
 -- --------------------------------------------------------
 
@@ -174,13 +155,7 @@ CREATE TABLE `students_grades` (
 --
 
 INSERT INTO `students_grades` (`id_student_grade`, `id_test`, `email`, `grade`, `percentage`) VALUES
-(1, 1, 'dkaslkdlakds@daksjldkalsd.da', 3, 50),
-(2, 1, 'dasghdgh2Gdhasghdagh@dasda.das', 5, 0),
-(3, 1, 'dasd@dasdas.das', 2, 50),
-(4, 1, 'dasda@dasdas.das', 2, 50),
-(5, 1, 'das@das.da', 2, 50),
-(6, 1, 'dgashG@gdahsghda.das', 5, 0),
-(7, 1, 'dasfg@da.das', 1, 100);
+(17, 4, 'martin@martin.martin', 3, 40);
 
 -- --------------------------------------------------------
 
@@ -202,7 +177,7 @@ CREATE TABLE `tests` (
 --
 
 INSERT INTO `tests` (`id_test`, `name`, `invite_code`, `id_user`, `id_grading`, `quantity_of_questions`) VALUES
-(1, 'xdddd', 'JeCkzpsbT5JzzKns', 1, 6, 2);
+(4, 'Test 1', 'Ns1wWT0Vpo4yKZcW', 1, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -225,8 +200,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `admin`, `name`, `email`, `password`, `timestamp`, `isDeleted`) VALUES
-(1, 1, 'admin', 'admin@admin', 'sha1$5126d643$1$14b5808f10f65559e718ea5d3d6ba700a8ed45b4', '2022-10-07 23:15:01', 0),
-(2, 0, 'martinos', 'martin@martin', 'sha1$291c22a5$1$262fe709204835ee9b4c821e92ff983020dcac99', '2023-01-03 21:02:47', 0);
+(1, 1, 'admin adminov', 'admin@admin', 'sha1$5126d643$1$14b5808f10f65559e718ea5d3d6ba700a8ed45b4', '2022-10-07 23:15:01', 0),
+(2, 0, 'na vypnuti', 'vypnout@vypnout', 'sha1$a16687fa$1$693603fbd738d3766aeb86d3e2a7c9ae5caba663', '2023-01-17 16:22:27', 0),
+(3, 0, 'vypnout 2', 'vypnout2@vypnout2', 'sha1$a48ea88b$1$8ad79fadd6e22578a355ad92f0306c6d7ef9b2a3', '2023-01-17 16:23:46', 0);
 
 -- --------------------------------------------------------
 
@@ -291,43 +267,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pro tabulku `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id_answer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_answer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT pro tabulku `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pro tabulku `grading`
 --
 ALTER TABLE `grading`
-  MODIFY `id_grading` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_grading` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pro tabulku `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id_question` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_question` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pro tabulku `students_grades`
 --
 ALTER TABLE `students_grades`
-  MODIFY `id_student_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_student_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pro tabulku `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pro tabulku `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
