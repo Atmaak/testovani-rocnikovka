@@ -134,6 +134,7 @@ export function DataProvider({ children }){
 
     const teacherLogOut = () => {
         removeCookies('teacher')
+        setIsAdmin(false)
         setTeacher(null)
         history('/')
     }
