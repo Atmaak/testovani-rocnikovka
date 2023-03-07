@@ -27,6 +27,7 @@ const Header = () => {
             <Nav.Link eventKey={2} onClick={() => goToLink('/student')}>Žák</Nav.Link>
             <Nav.Link eventKey={2} onClick={() => goToLink('/teacher')}>Učitel</Nav.Link>
             {isAdmin == 1 && <Nav.Link eventKey={2} onClick={() => goToLink('/adminsection')}>Administrace</Nav.Link>}
+            {isAdmin == 1 && <Nav.Link eventKey={2} onClick={() => goToLink('/stats')}>Statistika</Nav.Link>}
           </Nav>
           <Nav>
             {!teacher && <Nav.Link onClick={() => goToLink('/login')}>Přihlásit se</Nav.Link>}
