@@ -27,7 +27,7 @@ export function DataProvider({ children }){
     const [testOnAccount, setTestsOnAccount] = useState([])
     const [shownOwnTest, setShowOwnTest] = useState()
     const [answers, setAnswers] = useState()
-
+    const [grades, setGrades] = useState()
     //admin
     const [accounts, setAccounts] = useState()
 
@@ -100,6 +100,7 @@ export function DataProvider({ children }){
             body: JSON.stringify({test: test})
         })
         let data = await res.json()
+        await getGrades(data)
         await setShowOwnTest(data)
     }
 
@@ -206,6 +207,16 @@ export function DataProvider({ children }){
         })
     }
 
+    const getGrades = async (test) => {
+        let res = await fetch('http://localhost:3001/teacher/grades', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(test)
+        })
+        let data = await res.json()
+        await setGrades(data)
+    }
+
     const value = {
         DarkMode,
         textDarkMode,
@@ -232,7 +243,9 @@ export function DataProvider({ children }){
         completeTest,
         getAnswers,
         answers,
-        editQuestion
+        editQuestion,
+        getGrades,
+        grades
     }
 
     return (

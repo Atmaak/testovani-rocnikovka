@@ -125,6 +125,13 @@ const  makeInviteCode = (length = 16) => {
  return result;
 }
 
+const getGrades = (data) => {
+  console.log(data)
+  return new Promise(resolve => {
+    con.query(`SELECT * FROM students_grades WHERE id_test = ${data.test.id_test}`, (err, result) => resolve(result))
+  })
+}
+
 module.exports = {
   getAllTests,
   createTest,
@@ -132,5 +139,6 @@ module.exports = {
   addGrading,
   completeTest,
   getStudentAnsvers,
-  editQuestion
+  editQuestion,
+  getGrades
 }

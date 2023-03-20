@@ -4,7 +4,7 @@ import { Container, Button } from 'react-bootstrap'
 
 import { useNavigate } from 'react-router-dom'
 const Teacher = () => {
-  const { DarkMode, textDarkMode, testOnAccount, getTeacherTest } = useDataContext() 
+  const { DarkMode, textDarkMode, testOnAccount, getTeacherTest, getGrades } = useDataContext() 
   const history = useNavigate()
   const goToLink = (link) => {
     history(link)
@@ -16,6 +16,11 @@ const Teacher = () => {
 
   const handleSend = () => {
     
+  }
+
+  const handleStats = async (test) => {
+    await getTeacherTest(test)
+    history('/stats')
   }
 
   const handleChangeGrading = async (test) => {
@@ -49,6 +54,8 @@ const Teacher = () => {
                     <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => handleAnsvers(test)}>Odpovědi</Button>
                     <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => handleChangeGrading(test)}>Změnit známkování</Button>
                     <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => printTest(test)}>Vytisknout / Uložit jako PDF</Button>
+                    <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={() => handleStats(test)}>Statistiky</Button>
+                    
                   </div>
 
                 </div>

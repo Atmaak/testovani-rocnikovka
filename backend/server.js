@@ -75,3 +75,7 @@ app.post('/teacher/editQuestion', async (req, res) => {
     test.editQuestion(req.body)
     res.sendStatus(200)
 })
+
+app.post('/teacher/grades', async (req, res) => {
+    res.send(await test.getGrades(req.body))
+})

@@ -1,26 +1,41 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { useDataContext } from  '../context/DataContext'
 import { Button } from 'react-bootstrap'
+import { PieChart } from 'react-minimal-pie-chart'
 const Stats = () => {
-    const { DarkMode, textDarkMode, accounts, adminDeleteAccount, adminReinstateAccount, loading, getAccounts, teacher, testOnAccount } = useDataContext()
-    const showStats = () => {
-
+    const { DarkMode, textDarkMode, grades, shownOwnTest } = useDataContext()
+    const [percentageData, setPercentageData] = useState()
+    const [gradeData, setGradeData] = useState()
+    //{ title: 'Jednička', value: parseFloat(100 - two.current.value),range: `${100}% - ${two.current.value}%`, color: '#1fea00' },
+    const fillPercentageData = () => {
+      let data  = 0
+      {grades.map((grade) => {
+        data += grade.percentage
+      })}
+      setPercentageData(data)
     }
-  return (
-    <div style={{minHeight: "97vh"}} className={`bg-${DarkMode} text-${textDarkMode}`}>
-        {testOnAccount && <div>
-              {testOnAccount.map(test => (
-                <div key={test.id_test} className="border m-3">
-                  <div className='display-4 text-capitalize mb-3 mx-3'>{test.name}</div>
-                  <div className='m-3'>{test.invite_code}</div>
-                  <div className='d-flex justify-content-end'>
-                    <Button size={'sm'} className='m-3' variant={textDarkMode} onClick={showStats}>Poslat test</Button>
-                    
-                  </div>
 
-                </div>
-              ))}  
-        </div>}
+    const fillGradeData = () => {
+      let data = 0
+      {grades.map((grade) => {
+        data += grade.grade
+      })}
+      setGradeData(data)  
+    }
+
+    useEffect(() => {
+      fillPercentageData()
+      fillGradeData()
+    }, []);
+
+    return (
+    <div style={{minHeight: "97vh"}} className={`bg-${DarkMode} text-${textDarkMode} d-flex justify-content-center`}>
+        <div>
+          <h1 className='text-center'>{shownOwnTest.test.name}</h1>
+          <h3>Průměrný procenta: {percentageData / grades.length}</h3>
+          <h3>Průměrná známka: {(gradeData / grades.length).toFixed(2)}</h3>
+          <h3>Počet známek: {grades.length}</h3>
+        </div>
     </div>
   )
 }

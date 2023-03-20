@@ -30,7 +30,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/adminsection" element={<PrivateRoute admin={true}><AdminSection /></PrivateRoute>} />
-        <Route path="/stats" element={<PrivateRoute admin={true}><Stats /> </PrivateRoute>} />
+        <Route path="/stats" element={<PrivateRoute _shownOwnTest={true}><Stats /> </PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
         <Route path="/createTest" element={<PrivateRoute><CreateTest /></PrivateRoute>}/>
         <Route path="/showTest" element={<PrivateRoute><ShowTest /></PrivateRoute>}/>
