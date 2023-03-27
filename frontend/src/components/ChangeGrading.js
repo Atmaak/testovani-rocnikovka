@@ -22,7 +22,6 @@ const AddGrading = () => {
     if(!shownOwnTest) return history('/teacher')
     let _grades = shownOwnTest.test_grades
     const xdddddd= async () => {
-      console.log(_grades)
       setPieChartData([
         { title: 'Jednička', value: parseFloat(100 - _grades[0].percentage),range: `100% - ${_grades[0].percentage}%`, color: '#1fea00' },
         { title: 'Dvojka', value: parseFloat(_grades[0].percentage - _grades[1].percentage), range: `${_grades[0].percentage}% - ${_grades[1].percentage}%`, color: '#27a102' },
