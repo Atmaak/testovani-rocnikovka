@@ -45,8 +45,9 @@ const Stats = () => {
     }
 
     const doIt =() => {
-      var printContents = document.getElementById("kolacek").innerHTML;
-			var originalContents = document.body.innerHTML;
+      console.log('tisk')
+      let printContents = document.getElementById("kolacek").innerHTML;
+			let originalContents = document.body.innerHTML;
 
 			document.body.innerHTML = printContents;
 
@@ -76,7 +77,7 @@ const Stats = () => {
             <div key={data.title}>
             <div className='d-flex justify-content-between p-3 m-3 rounded' style={{backgroundColor: data.color}}>
               <h1 className='m-3 text-light'>{data.title}</h1>
-              <h1 className='m-3 text-light'>{data.value}</h1>
+              <h1 className='m-3 text-light'>{data.value * 100 / grades.length}</h1>
             </div>
             </div>
           ))}
