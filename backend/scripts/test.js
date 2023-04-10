@@ -1,6 +1,8 @@
 const mysql = require("mysql");
 require('dotenv').config()
 
+const sendMail = require('./sendMail')
+
 const con = mysql.createConnection({
   host: process.env.db_host,
   user: process.env.db_user,
@@ -48,6 +50,16 @@ const createTest = async (data) => {
 const completeTest = async (data) => {
   try{con.query(`INSERT INTO students_grades(id_test, email, grade, percentage) VALUES (${data.test.id_test}, '${data.email}', ${data.grade.grade}, ${data.grade.percentage} )`)}
   catch(err) {console.log(err)}
+
+  sendMail.sendIt({
+    email: {
+      to: data.email,
+      subject: `Vysledky testu ${data.test.name}`,
+      text: `Jméno testu: ${data.test.name} \nZnámka: ${data.grade.grade} \nProcenta: ${data.grade.percentage}`,
+      html: ""
+    }
+  })
+
 }
 
 const getStudentAnsvers = async (data) => {

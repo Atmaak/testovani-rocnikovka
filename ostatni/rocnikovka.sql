@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Úte 17. led 2023, 16:25
+-- Vytvořeno: Pon 10. dub 2023, 16:11
 -- Verze serveru: 10.4.24-MariaDB
 -- Verze PHP: 8.1.6
 
@@ -92,7 +92,17 @@ INSERT INTO `grades` (`id_grade`, `id_grading`, `grade`, `percentage`) VALUES
 (2, 1, 2, 60),
 (3, 1, 3, 40),
 (4, 1, 4, 20),
-(5, 1, 5, 0);
+(5, 1, 5, 0),
+(6, 2, 1, 23),
+(7, 2, 2, 22),
+(8, 2, 3, 21),
+(9, 2, 4, 2),
+(10, 2, 5, 0),
+(11, 3, 1, 80),
+(12, 3, 2, 60),
+(13, 3, 3, 40),
+(14, 3, 4, 20),
+(15, 3, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -111,7 +121,9 @@ CREATE TABLE `grading` (
 --
 
 INSERT INTO `grading` (`id_grading`, `id_user`, `timestamp`) VALUES
-(1, 1, '2022-11-12 18:28:50');
+(1, 1, '2022-11-12 18:28:50'),
+(2, 1, '2023-04-10 14:11:11'),
+(3, 1, '2023-04-10 14:11:19');
 
 -- --------------------------------------------------------
 
@@ -155,7 +167,12 @@ CREATE TABLE `students_grades` (
 --
 
 INSERT INTO `students_grades` (`id_student_grade`, `id_test`, `email`, `grade`, `percentage`) VALUES
-(17, 4, 'martin@martin.martin', 3, 40);
+(17, 4, 'martin@martin.martin', 3, 40),
+(18, 4, 'dadsa@dasdas.asd', 3, 40),
+(19, 4, 'dasasdasdasdasdasdasdasd@dasdsaasd.asdasdasd', 1, 100),
+(20, 4, 'damkkmdasmk@dsamkmksda.dsasdaads', 1, 100),
+(21, 4, 'kubjak21@gmail.com', 2, 60),
+(22, 4, 'kubjak21@gmail.com', 1, 80);
 
 -- --------------------------------------------------------
 
@@ -177,7 +194,7 @@ CREATE TABLE `tests` (
 --
 
 INSERT INTO `tests` (`id_test`, `name`, `invite_code`, `id_user`, `id_grading`, `quantity_of_questions`) VALUES
-(4, 'Test 1', 'Ns1wWT0Vpo4yKZcW', 1, 1, 5);
+(4, 'Test 1', 'Ns1wWT0Vpo4yKZcW', 1, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -273,13 +290,13 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT pro tabulku `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pro tabulku `grading`
 --
 ALTER TABLE `grading`
-  MODIFY `id_grading` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_grading` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pro tabulku `questions`
@@ -291,7 +308,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT pro tabulku `students_grades`
 --
 ALTER TABLE `students_grades`
-  MODIFY `id_student_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_student_grade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pro tabulku `tests`

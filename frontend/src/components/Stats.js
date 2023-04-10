@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useDataContext } from  '../context/DataContext'
 import { PieChart } from 'react-minimal-pie-chart'
+import { useNavigate } from 'react-router-dom'
 const Stats = () => {
-    const { DarkMode, textDarkMode, grades, shownOwnTest } = useDataContext()
-    const [percentageData, setPercentageData] = useState()
-    const [gradeData, setGradeData] = useState()
-    const [pieChartData, setPieChartData] = useState([])
+  const { DarkMode, textDarkMode, grades, shownOwnTest } = useDataContext()
+  const [percentageData, setPercentageData] = useState()
+  const [gradeData, setGradeData] = useState()
+  const [pieChartData, setPieChartData] = useState([])
+  const history = useNavigate()
     //{ title: 'Jednička', value: parseFloat(100 - two.current.value),range: `${100}% - ${two.current.value}%`, color: '#1fea00' },
     const fillPercentageData = () => {
       let data  = 0
@@ -44,8 +46,7 @@ const Stats = () => {
       console.log(pieChartData)
     }
 
-    const doIt =() => {
-      console.log('tisk')
+    const doIt = async () => {
       let printContents = document.getElementById("kolacek").innerHTML;
 			let originalContents = document.body.innerHTML;
 
@@ -54,6 +55,8 @@ const Stats = () => {
 			window.print();
 
 			document.body.innerHTML = originalContents;
+
+      window.location.href = "/teacher";
 
     }
 
