@@ -30,7 +30,6 @@ const Stats = () => {
       for (let i = 0; i < 5; i++) {
         for (let j = 0; j < grades.length; j++) {
           if(grades[j].grade == i){
-            console.log(grades[j].grade)
             gradesS[i] += 1
           }
         }
@@ -80,7 +79,7 @@ const Stats = () => {
             <div key={data.title}>
             <div className='d-flex justify-content-between p-3 m-3 rounded' style={{backgroundColor: data.color}}>
               <h1 className='m-3 text-light'>{data.title}</h1>
-              <h1 className='m-3 text-light'>{data.value * 100 / grades.length}</h1>
+              <h1 className='m-3 text-light'>{parseInt(data.value * 100 / grades.length)}</h1>
             </div>
             </div>
           ))}
