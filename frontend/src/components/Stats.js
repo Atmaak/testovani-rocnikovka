@@ -29,7 +29,7 @@ const Stats = () => {
       let gradesS = [0,0,0,0,0]
       for (let i = 0; i < 5; i++) {
         for (let j = 0; j < grades.length; j++) {
-          if(grades[j].grade == i){
+          if(grades[j].grade == i + 1){
             gradesS[i] += 1
           }
         }
@@ -42,7 +42,6 @@ const Stats = () => {
         { title: 'Čtyřka', value: grades.length / 100 * gradesS[3], color: '#002f06' },
         { title: 'Pětka', value: grades.length / 100 * gradesS[4],  color: '#000000' }
       ])
-      console.log(pieChartData)
     }
 
     const doIt = async () => {
