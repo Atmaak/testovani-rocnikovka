@@ -10,7 +10,7 @@ const sendIt = (data) => {
         },
       });
     transporter.sendMail({
-        from: 'rocnikovka69@seznam.cz', // sender address
+        from: 'Testovac <rocnikovka69@seznam.cz>', // sender address
         to: `${data.email.to}`, // list of receivers
         subject: `${data.email.subject}`, // Subject line
         text: `${data.email.text}`, // plain text body
